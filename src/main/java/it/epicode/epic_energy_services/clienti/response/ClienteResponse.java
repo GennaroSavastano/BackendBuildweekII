@@ -1,5 +1,6 @@
-package it.epicode.epic_energy_services.clienti;
+package it.epicode.epic_energy_services.clienti.response;
 
+import it.epicode.epic_energy_services.clienti.RagioneSociale;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;

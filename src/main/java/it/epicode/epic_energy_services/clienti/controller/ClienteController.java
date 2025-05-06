@@ -1,5 +1,9 @@
-package it.epicode.epic_energy_services.clienti;
+package it.epicode.epic_energy_services.clienti.controller;
 
+import it.epicode.epic_energy_services.clienti.Cliente;
+import it.epicode.epic_energy_services.clienti.request.ClienteRequest;
+import it.epicode.epic_energy_services.clienti.response.ClienteResponse;
+import it.epicode.epic_energy_services.clienti.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;

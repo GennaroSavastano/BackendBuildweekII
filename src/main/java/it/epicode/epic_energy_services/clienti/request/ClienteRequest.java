@@ -1,5 +1,6 @@
-package it.epicode.epic_energy_services.clienti;
+package it.epicode.epic_energy_services.clienti.request;
 
+import it.epicode.epic_energy_services.clienti.RagioneSociale;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

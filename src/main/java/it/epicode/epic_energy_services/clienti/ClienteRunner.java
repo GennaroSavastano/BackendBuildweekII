@@ -1,6 +1,7 @@
 package it.epicode.epic_energy_services.clienti;
 
 import com.github.javafaker.Faker;
+import it.epicode.epic_energy_services.clienti.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
