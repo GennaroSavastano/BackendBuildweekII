@@ -28,4 +28,5 @@ public class Indirizzo {
     @JoinColumn(name = "comune_id")
     private Comune comune;
 
+
 }

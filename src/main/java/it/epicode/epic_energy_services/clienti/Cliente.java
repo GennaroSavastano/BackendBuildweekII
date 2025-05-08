@@ -1,5 +1,6 @@
 package it.epicode.epic_energy_services.clienti;
 
+import it.epicode.epic_energy_services.indirizzi.Indirizzo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,4 +43,12 @@ public class Cliente {
     private String cognomeContatto;
     @Column(nullable = false)
     private String telefonoContatto;
+
+    @OneToOne
+    @JoinColumn(name = "indirizzo_sede_legale")
+    private Indirizzo indirizzoSedeLegale;
+
+    @OneToOne
+    @JoinColumn(name = "indirizzo_sede_operativa")
+    private Indirizzo indirizzoSedeOperativa;
 }
