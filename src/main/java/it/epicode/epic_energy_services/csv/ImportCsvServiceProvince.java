@@ -28,7 +28,6 @@ public class ImportCsvServiceProvince {
 
     public Integer importProvince(MultipartFile file) throws IOException {
         Set<Provincia> province = parseCsv(file);
-            provinciaRepository.saveAll(province);
             return province.size();
     }
 
