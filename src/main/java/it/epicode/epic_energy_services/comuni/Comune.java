@@ -4,6 +4,7 @@ import it.epicode.epic_energy_services.indirizzi.Indirizzo;
 import it.epicode.epic_energy_services.province.Provincia;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Comune {
 
     @Id
