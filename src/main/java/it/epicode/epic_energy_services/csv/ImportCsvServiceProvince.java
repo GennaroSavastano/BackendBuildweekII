@@ -47,7 +47,7 @@ public class ImportCsvServiceProvince {
          return csvToBean.parse()
             .stream().map(csvLine -> Provincia.builder()
                     .sigla(csvLine.getSigla())
-                    .nome(csvLine.getProvincia())
+                    .nome(csvLine.getProvinciaImp())
                     .build()
                     )
                     .collect(Collectors.toSet());

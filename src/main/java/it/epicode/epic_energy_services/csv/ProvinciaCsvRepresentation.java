@@ -14,8 +14,8 @@ public class ProvinciaCsvRepresentation {
 
     @CsvBindByName(column = "sigla")
     private String sigla;
-    @CsvBindByName(column = "provincia")
-    private String provincia;
+    @CsvBindByName(column = "provincia_imp")
+    private String provinciaImp;
     @CsvBindByName(column = "regione")
     private String regione;
 }
