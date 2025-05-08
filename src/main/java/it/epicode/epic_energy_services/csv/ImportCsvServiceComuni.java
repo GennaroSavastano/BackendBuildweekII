@@ -5,6 +5,8 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import it.epicode.epic_energy_services.comuni.Comune;
 import it.epicode.epic_energy_services.comuni.ComuneRepository;
+import it.epicode.epic_energy_services.province.Provincia;
+import it.epicode.epic_energy_services.province.ProvinciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,9 +26,13 @@ public class ImportCsvServiceComuni {
         @Autowired
         private ComuneRepository comuneRepository;
 
+        @Autowired
+        private ProvinciaRepository provinciaRepository;
+
         public Integer importComuni(MultipartFile file) throws IOException {
             Set<Comune> comuni = parseCsv(file);
-            return null;
+            List<Comune> savedComuni = comuneRepository.saveAll(comuni);
+            return savedComuni.size();
         }
 
         private Set<Comune> parseCsv(MultipartFile file) throws IOException {
@@ -43,11 +50,12 @@ public class ImportCsvServiceComuni {
                 return csvToBean.parse()
                         .stream().map(csvLine -> Comune.builder()
                                 .nome(csvLine.getNome())
+                                .provincia(null)
+                                .provinciaDaCsv(csvLine.getProvincia())
                                 .build()
                         )
                         .collect(Collectors.toSet());
             }
         }
 
-    }
-
+}

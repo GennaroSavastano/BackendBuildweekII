@@ -24,8 +24,10 @@ public class Comune {
     @Column(nullable = false)
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "provincia_id")
+    @Column(nullable = false)
+    private String provinciaDaCsv;
+
+    @ManyToOne(optional = true)
     private Provincia provincia;
 
     @OneToMany(mappedBy = "comune")

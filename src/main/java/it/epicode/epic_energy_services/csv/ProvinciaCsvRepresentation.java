@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ProvinciaCsvRepresentation {
 
-    @CsvBindByName(column = "sigla")
+    @CsvBindByName(column = "Sigla")
     private String sigla;
-    @CsvBindByName(column = "provincia_imp")
+    @CsvBindByName(column = "Provincia")
     private String provinciaImp;
-    @CsvBindByName(column = "regione")
+    @CsvBindByName(column = "Regione")
     private String regione;
 }

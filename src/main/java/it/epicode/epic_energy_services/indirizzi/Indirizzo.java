@@ -24,7 +24,7 @@ public class Indirizzo {
     @Column(nullable = false)
     private String cap;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "comune_id")
     private Comune comune;
 

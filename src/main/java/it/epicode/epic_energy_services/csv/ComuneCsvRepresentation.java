@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
     @Builder
     public class ComuneCsvRepresentation {
 
-        @CsvBindByName(column = "codice provincia")
+        @CsvBindByName(column = "Codice Provincia (Storico)(1)")
         private String codice;
-        @CsvBindByName(column = "progressivo comune")
+        @CsvBindByName(column = "Progressivo del Comune (2)")
         private String progressivo;
-        @CsvBindByName(column = "nome comune")
+        @CsvBindByName(column = "Denominazione in italiano")
         private String nome;
-        @CsvBindByName(column = "provincia")
+        @CsvBindByName(column = "Provincia")
         private String provincia;
     }
 
