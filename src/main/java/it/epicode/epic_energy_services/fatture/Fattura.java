@@ -1,5 +1,6 @@
 package it.epicode.epic_energy_services.fatture;
 
+import it.epicode.epic_energy_services.clienti.Cliente;
 import jakarta.persistence.*;
 import lombok.*;
 
