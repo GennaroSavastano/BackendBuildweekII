@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProvinciaService {
@@ -58,5 +59,8 @@ public class ProvinciaService {
     public boolean existsBySigla(String sigla) {
         return provinciaRepository.existsBySigla(sigla);
     }
+
+  // metodo save all(Set<Provincia> province)
+
 }
 
