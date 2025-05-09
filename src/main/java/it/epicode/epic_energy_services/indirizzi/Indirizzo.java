@@ -28,5 +28,10 @@ public class Indirizzo {
     @JoinColumn(name = "comune_id")
     private Comune comune;
 
+    @OneToOne(mappedBy = "indirizzoSedeLegale")
+    private Cliente clienteSedeLegale;
+
+    @OneToOne(mappedBy = "indirizzoSedeOperativa")
+    private Cliente clienteSedeOperativa;
 
 }
