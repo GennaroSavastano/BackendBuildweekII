@@ -1,5 +1,6 @@
 package it.epicode.epic_energy_services.indirizzi;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.epicode.epic_energy_services.clienti.Cliente;
 import it.epicode.epic_energy_services.comuni.Comune;
 import jakarta.persistence.*;
@@ -28,9 +29,11 @@ public class Indirizzo {
     @JoinColumn(name = "comune_id")
     private Comune comune;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "indirizzoSedeLegale")
     private Cliente clienteSedeLegale;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "indirizzoSedeOperativa")
     private Cliente clienteSedeOperativa;
 

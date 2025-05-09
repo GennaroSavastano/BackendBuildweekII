@@ -1,5 +1,6 @@
 package it.epicode.epic_energy_services.clienti;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.epicode.epic_energy_services.indirizzi.Indirizzo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,10 +45,12 @@ public class Cliente {
     @Column(nullable = false)
     private String telefonoContatto;
 
+    @JsonManagedReference
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "indirizzo_sede_legale")
     private Indirizzo indirizzoSedeLegale;
 
+    @JsonManagedReference
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "indirizzo_sede_operativa")
     private Indirizzo indirizzoSedeOperativa;
