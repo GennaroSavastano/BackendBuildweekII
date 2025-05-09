@@ -2,6 +2,7 @@ package it.epicode.epic_energy_services.auth;
 
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,29 +16,37 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class AppUserService {
 
-    @Autowired
-    private AppUserRepository appUserRepository;
+    private final AppUserRepository appUserRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    public AppUser registerUser(String username, String password, Set<Role> roles) {
+    public AppUser registerUser(String username,
+                                String email,
+                                String rawPassword,
+                                String nome,
+                                String cognome,
+                                String avatar,
+                                Set<Role> roles) {
         if (appUserRepository.existsByUsername(username)) {
             throw new EntityExistsException("Username già in uso");
         }
+        if (appUserRepository.existsByEmail(email)) {
+            throw new EntityExistsException("Email già in uso");
+        }
 
-        AppUser appUser = new AppUser();
-        appUser.setUsername(username);
-        appUser.setPassword(passwordEncoder.encode(password));
-        appUser.setRoles(roles);
+        AppUser appUser = AppUser.builder()
+                .username(username)
+                .email(email)
+                .password(passwordEncoder.encode(rawPassword))
+                .nome(nome)
+                .cognome(cognome)
+                .avatar(avatar)
+                .roles(roles)
+                .build();
         return appUserRepository.save(appUser);
     }
 
@@ -58,12 +67,14 @@ public class AppUserService {
         }
     }
 
-
     public AppUser loadUserByUsername(String username)  {
         AppUser appUser = appUserRepository.findByUsername(username)
             .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con username: " + username));
-
-
         return appUser;
+    }
+
+    public AppUser loadUserByEmail(String email) {
+        return appUserRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Utente non trovato con email: " + email));
     }
 }
