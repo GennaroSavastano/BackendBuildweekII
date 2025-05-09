@@ -1,6 +1,7 @@
 package it.epicode.epic_energy_services.clienti;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import it.epicode.epic_energy_services.fatture.Fattura;
 import it.epicode.epic_energy_services.indirizzi.Indirizzo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -54,4 +57,7 @@ public class Cliente {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "indirizzo_sede_operativa")
     private Indirizzo indirizzoSedeOperativa;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Fattura> fatture = new ArrayList<>();
 }
