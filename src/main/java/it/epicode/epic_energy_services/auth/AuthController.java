@@ -26,7 +26,11 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest) {
         appUserService.registerUser(
                 registerRequest.getUsername(),
-                registerRequest.getPassword(),
+                registerRequest.getEmail(),
+                registerRequest.getRawPassword(),
+                registerRequest.getNome(),
+                registerRequest.getCognome(),
+                registerRequest.getAvatar(),
                 Set.of(Role.ROLE_USER) // Assegna il ruolo di default
         );
         return ResponseEntity.ok("Registrazione avvenuta con successo");
