@@ -18,7 +18,7 @@ public class CsvImportRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         try {
-            // Import province prima (così le comuni possono collegarsi dopo)
+
             try (InputStream provinceStream = getClass().getClassLoader().getResourceAsStream("province-italiane.csv")) {
                 if (provinceStream == null) {
                     System.err.println("❌ File province.csv non trovato in resources!");
@@ -28,7 +28,7 @@ public class CsvImportRunner implements CommandLineRunner {
                 }
             }
 
-            // Import comuni poi
+
             try (InputStream comuniStream = getClass().getClassLoader().getResourceAsStream("comuni-italiani.csv")) {
                 if (comuniStream == null) {
                     System.err.println("❌ File comuni.csv non trovato in resources!");

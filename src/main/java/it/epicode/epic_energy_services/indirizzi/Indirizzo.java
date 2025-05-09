@@ -29,11 +29,11 @@ public class Indirizzo {
     @JoinColumn(name = "comune_id")
     private Comune comune;
 
-    @JsonBackReference
+
     @OneToOne(mappedBy = "indirizzoSedeLegale")
     private Cliente clienteSedeLegale;
 
-    @JsonBackReference
+
     @OneToOne(mappedBy = "indirizzoSedeOperativa")
     private Cliente clienteSedeOperativa;
 

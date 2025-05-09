@@ -4,6 +4,8 @@ import it.epicode.epic_energy_services.clienti.Cliente;
 import it.epicode.epic_energy_services.clienti.request.ClienteRequest;
 import it.epicode.epic_energy_services.clienti.response.ClienteResponse;
 import it.epicode.epic_energy_services.clienti.repository.ClienteRepository;
+import it.epicode.epic_energy_services.indirizzi.Indirizzo;
+import it.epicode.epic_energy_services.indirizzi.IndirizzoRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +22,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class ClienteService {
     private final ClienteRepository clienteRepository;
+    private final IndirizzoRepository indirizzoRepository;
 
     public Cliente findById(Long id) {
         return clienteRepository.findById(id).orElse(null);
@@ -30,6 +33,12 @@ public class ClienteService {
     }
 
     public void deleteById(Long id) {
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
+        Indirizzo indirizzoSedeLegale = cliente.getIndirizzoSedeLegale();
+        Indirizzo indirizzoSedeOperativa = cliente.getIndirizzoSedeOperativa();
+        indirizzoSedeOperativa.setClienteSedeOperativa(null);
+        indirizzoSedeLegale.setClienteSedeLegale(null);
+        indirizzoRepository.findByClienteId(id).forEach(indirizzoRepository::delete);
         clienteRepository.deleteById(id);
     }
 

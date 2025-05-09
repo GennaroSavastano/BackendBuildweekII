@@ -45,13 +45,11 @@ public class Cliente {
     @Column(nullable = false)
     private String telefonoContatto;
 
-    @JsonManagedReference
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "indirizzo_sede_legale")
     private Indirizzo indirizzoSedeLegale;
 
-    @JsonManagedReference
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "indirizzo_sede_operativa")
     private Indirizzo indirizzoSedeOperativa;
 }
