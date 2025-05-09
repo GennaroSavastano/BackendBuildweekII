@@ -30,10 +30,12 @@ public class Indirizzo {
     private Comune comune;
 
 
+    @JsonBackReference
     @OneToOne(mappedBy = "indirizzoSedeLegale")
     private Cliente clienteSedeLegale;
 
 
+    @JsonBackReference
     @OneToOne(mappedBy = "indirizzoSedeOperativa")
     private Cliente clienteSedeOperativa;
 
