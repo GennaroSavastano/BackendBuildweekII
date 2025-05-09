@@ -1,5 +1,6 @@
 package it.epicode.epic_energy_services.comuni;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.epicode.epic_energy_services.indirizzi.Indirizzo;
 import it.epicode.epic_energy_services.province.Provincia;
 import jakarta.persistence.*;
@@ -31,5 +32,6 @@ public class Comune {
     private Provincia provincia;
 
     @OneToMany(mappedBy = "comune")
+    @JsonIgnore
     private List<Indirizzo> indirizzi;
 }

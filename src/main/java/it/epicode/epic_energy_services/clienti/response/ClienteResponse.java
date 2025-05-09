@@ -1,6 +1,7 @@
 package it.epicode.epic_energy_services.clienti.response;
 
 import it.epicode.epic_energy_services.clienti.RagioneSociale;
+import it.epicode.epic_energy_services.indirizzi.Indirizzo;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,6 @@ public class ClienteResponse {
     private String nomeContatto;
     private String cognomeContatto;
     private String telefonoContatto;
-    private String indirizzoSedeLegale;
-    private String indirizzoSedeOperativa;
+    private Indirizzo indirizzoSedeLegale;
+    private Indirizzo indirizzoSedeOperativa;
 }
