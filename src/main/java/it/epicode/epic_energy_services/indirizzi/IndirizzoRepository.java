@@ -8,4 +8,6 @@ import java.util.List;
 
 @Repository
 public interface IndirizzoRepository extends JpaRepository<Indirizzo, Long>{
+    @Query("select i from Indirizzo i where i.clienteSedeLegale.id = :id or i.clienteSedeOperativa.id = :id")
+    List<Indirizzo> findByClienteId(Long id);
 }
