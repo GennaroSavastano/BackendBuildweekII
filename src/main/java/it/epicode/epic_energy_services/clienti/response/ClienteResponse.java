@@ -25,4 +25,6 @@ public class ClienteResponse {
     private String nomeContatto;
     private String cognomeContatto;
     private String telefonoContatto;
+    private String indirizzoSedeLegale;
+    private String indirizzoSedeOperativa;
 }

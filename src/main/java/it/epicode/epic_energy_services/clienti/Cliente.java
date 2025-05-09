@@ -44,11 +44,11 @@ public class Cliente {
     @Column(nullable = false)
     private String telefonoContatto;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "indirizzo_sede_legale")
     private Indirizzo indirizzoSedeLegale;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "indirizzo_sede_operativa")
     private Indirizzo indirizzoSedeOperativa;
 }

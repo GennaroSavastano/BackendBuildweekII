@@ -4,6 +4,7 @@ import it.epicode.epic_energy_services.clienti.Cliente;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,8 @@ public interface ClienteRepository extends JpaRepository <Cliente, Long> {
     Page<Cliente> findAllByOrderByFatturatoAnnualeAsc(Pageable pageable);
     Page<Cliente> findAllByOrderByDataInserimentoAsc(Pageable pageable);
     Page<Cliente> findAllByOrderByDataUltimoContattoAsc(Pageable pageable);
+
+    Page<Cliente> findAllByOrderByIndirizzoSedeLegale_Comune_ProvinciaDaCsvAsc(Pageable pageable);
 
     Page<Cliente> findByFatturatoAnnualeBetween(int min, int max, Pageable pageable);
     Page<Cliente> findByDataInserimentoGreaterThanEqual(LocalDate dataInserimento, Pageable pageable);

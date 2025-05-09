@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -55,4 +52,31 @@ public class ImportCsvServiceProvince {
         }
     }
 
+    public Integer importProvinceFromResource(InputStream inputStream) throws IOException {
+        Set<Provincia> province = parseCsvProvince(inputStream);
+        List<Provincia> saved = provinciaRepository.saveAll(province);
+        return saved.size();
+    }
+
+    private Set<Provincia> parseCsvProvince(InputStream inputStream) throws IOException {
+        try (Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            HeaderColumnNameMappingStrategy<ProvinciaCsvRepresentation> strategy =
+                    new HeaderColumnNameMappingStrategy<>();
+            strategy.setType(ProvinciaCsvRepresentation.class);
+            CsvToBean<ProvinciaCsvRepresentation> csvToBean = new CsvToBeanBuilder<ProvinciaCsvRepresentation>(reader)
+                    .withMappingStrategy(strategy)
+                    .withSeparator(';')
+                    .withIgnoreEmptyLine(true)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            return csvToBean.parse()
+                    .stream().map(csvLine -> Provincia.builder()
+                            .sigla(csvLine.getSigla())
+                            .nome(csvLine.getProvinciaImp())
+                            .build()
+                    )
+                    .collect(Collectors.toSet());
+        }
+    }
 }

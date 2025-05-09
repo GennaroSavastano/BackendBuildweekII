@@ -86,6 +86,14 @@ public class ClienteController {
     }
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @GetMapping("/provinciaSedeLegale")
+    public Page<ClienteResponse> orderClientiByProvinciaSedeLegale(@RequestParam(defaultValue = "0") int page,
+                                                                   @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return clienteService.getClientiOrdinatiByProvincia(page, size);
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/filterFatturato")
     public Page<ClienteResponse> filterByFatturatoAnnuale(@RequestParam int min, @RequestParam int max, @ParameterObject Pageable pageable) {
         return clienteService.findByFatturatoAnnuale(min, max, pageable);

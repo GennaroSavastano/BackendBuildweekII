@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -65,6 +66,11 @@ public class ClienteService {
 
     public Page<ClienteResponse> getAllClientiOrdinatiByDataUltimoContatto(Pageable pageable) {
         return clienteRepository.findAllByOrderByDataUltimoContattoAsc(pageable).map(this::fromEntity);
+    }
+
+    public Page<ClienteResponse> getClientiOrdinatiByProvincia(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return clienteRepository.findAllByOrderByIndirizzoSedeLegale_Comune_ProvinciaDaCsvAsc(pageable).map(this::fromEntity);
     }
 
     public Page<ClienteResponse> findByFatturatoAnnuale(int min, int max, Pageable pageable) {

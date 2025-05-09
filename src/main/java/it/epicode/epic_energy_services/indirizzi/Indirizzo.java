@@ -1,5 +1,6 @@
 package it.epicode.epic_energy_services.indirizzi;
 
+import it.epicode.epic_energy_services.clienti.Cliente;
 import it.epicode.epic_energy_services.comuni.Comune;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,6 @@ public class Indirizzo {
     private String via;
     @Column(nullable = false)
     private String civico;
-    @Column(nullable = false)
     private String localita;
     @Column(nullable = false)
     private String cap;

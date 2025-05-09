@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,5 +54,35 @@ public class ImportCsvServiceComuni {
                         .collect(Collectors.toSet());
             }
         }
+
+    public Integer importComuniFromResource(InputStream inputStream) throws IOException {
+        Set<Comune> comuni = parseCsvComuni(inputStream);
+        List<Comune> savedComuni = comuneRepository.saveAll(comuni);
+        return savedComuni.size();
+    }
+
+    private Set<Comune> parseCsvComuni(InputStream inputStream) throws IOException {
+        try (Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            HeaderColumnNameMappingStrategy<ComuneCsvRepresentation> strategy =
+                    new HeaderColumnNameMappingStrategy<>();
+            strategy.setType(ComuneCsvRepresentation.class);
+            CsvToBean<ComuneCsvRepresentation> csvToBean = new CsvToBeanBuilder<ComuneCsvRepresentation>(reader)
+                    .withMappingStrategy(strategy)
+                    .withSeparator(';')
+                    .withIgnoreEmptyLine(true)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            return csvToBean.parse()
+                    .stream().map(csvLine -> Comune.builder()
+                            .nome(csvLine.getNome())
+                            .provincia(null)
+                            .provinciaDaCsv(csvLine.getProvincia())
+                            .build()
+                    )
+                    .collect(Collectors.toSet());
+        }
+    }
+
 
 }
